@@ -57,7 +57,9 @@
     "yn": "^3.1.1"
   },
   "scripts": {
-    "start": "nodemon index.ts"
+    "start": "nodemon index.ts",
+    "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts"
+
   },
   "keywords": [],
   "author": "",

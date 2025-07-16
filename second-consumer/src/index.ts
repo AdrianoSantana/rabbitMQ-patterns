@@ -8,7 +8,7 @@ const messages: RabbitMessage[] = []
 const initConnection = async () => {
     try {
         const conn = await connect({
-            hostname: 'localhost',
+            hostname: 'rabbitmq-estudos',
             username: 'guest',
             password: 'guest',
             port: 5672

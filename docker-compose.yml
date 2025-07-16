@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+    rabbitmq:
+        image: rabbitmq:3-management
+        container_name: rabbitmq-estudos
+        ports:
+            - '5672:5672'
+            - '15672:15672'
+        environment:
+            RABBITMQ_DEFAULT_USER: guest
+            RABBITMQ_DEFAULT_PASS: guest
+
+    consumer:
+        build:
+            context: ./consumer
+        container_name: consumer
+        depends_on:
+            - rabbitmq
+        volumes:
+            - ./consumer:/app
+            - /app/node_modules # Evita conflito com node_modules do host
+        working_dir: /app
+        command: sh -c "npm install && npm run dev"
+        restart: on-failure
+
+    second-consumer:
+        build:
+            context: ./second-consumer
+        container_name: second-consumer
+        depends_on:
+            - rabbitmq
+        volumes:
+            - ./second-consumer:/app
+            - /app/node_modules
+        working_dir: /app
+        command: sh -c "npm install && npm run dev"
+        restart: on-failure
