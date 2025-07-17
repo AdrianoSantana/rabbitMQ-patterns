@@ -33,9 +33,6 @@ const consumeEvents = (data: any) => {
     }
 }
 
-const initQueues = async () => {
-    await channel.assertQueue('q1.events.client2')
-}
 
 const app = express()
 
@@ -46,7 +43,7 @@ app.use('/', (req, res) => {
 app.listen(5005, async () => {
     console.log('listenning on 5005')
     await initConnection()
-    await channel.consume('q.events.client2', consumeEvents);
+    await channel.consume('q.messages2', consumeEvents);
 })
 
 type RabbitMessage = {

@@ -41,7 +41,7 @@ app.use('/', (req, res) => {
 app.listen(5004, async () => {
     console.log('listenning on 5004')
     await initConnection()
-    await channel.consume('q.events.client1', consumeEvents);
+    await channel.consume('q.messages1', consumeEvents);
 })
 
 type RabbitMessage = {
